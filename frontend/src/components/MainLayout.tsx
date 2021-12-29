@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppShell, Navbar, Header } from '@mantine/core';
+import { AppShell, Navbar, Header, Input } from '@mantine/core';
 import Brand from './Brand';
 import NavbarList from './NavbarList';
 import { Route, Routes } from 'react-router';
@@ -10,6 +10,7 @@ import Offers from '../pages/Offers';
 import Submits from '../pages/Submits';
 import Results from '../pages/Results';
 import Notifications from '../pages/Notifications';
+import { SearchIcon } from '@heroicons/react/solid';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -26,7 +27,14 @@ const MainLayout = (props: Props) => {
       }
       header={
         <Header height={60} padding='xs'>
-          <Brand />
+          <div className='flex items-center justify-between'>
+            <Brand />
+            <Input
+              className='rounded-md w-80'
+              icon={<SearchIcon className='h-5 w-5 text-gray-400' />}
+              placeholder='Search for things here...'
+            />
+          </div>
         </Header>
       }
       styles={(theme) => ({

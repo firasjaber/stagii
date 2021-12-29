@@ -8,8 +8,7 @@ import {
   UsersIcon,
 } from '@heroicons/react/solid';
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { JsxElement } from 'typescript';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const pages = [
   {
@@ -68,8 +67,8 @@ interface Props {}
 const NavbarList = (props: Props) => {
   return (
     <div>
-      {pages.map(({ href, title, Icon }) => (
-        <ListItem href={href} title={title} Icon={Icon} />
+      {pages.map(({ href, title, Icon }, idx) => (
+        <ListItem href={href} title={title} Icon={Icon} key={idx} />
       ))}
     </div>
   );
@@ -83,12 +82,13 @@ interface ListItemProps {
 
 const ListItem = ({ href, title, Icon }: ListItemProps) => {
   const { pathname } = useLocation();
-
+  const navigate = useNavigate();
   return (
     <div
       className={`flex items-center rounded-sm space-x-4 text-gray-600 py-2 px-3 hover:bg-gray-100 transition-all ease-in-out cursor-pointer ${
         pathname === href && 'bg-gray-100'
       }`}
+      onClick={() => navigate(href)}
     >
       {Icon}
       <Link to={href}>{title}</Link>

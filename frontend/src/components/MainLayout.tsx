@@ -5,6 +5,11 @@ import NavbarList from './NavbarList';
 import { Route, Routes } from 'react-router';
 import Home from '../pages/Home';
 import Students from '../pages/Students';
+import Companies from '../pages/Companies';
+import Offers from '../pages/Offers';
+import Submits from '../pages/Submits';
+import Results from '../pages/Results';
+import Notifications from '../pages/Notifications';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -36,6 +41,11 @@ const MainLayout = (props: Props) => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/students' element={<Students />} />
+        <Route path='/companies' element={<Companies />} />
+        <Route path='/offers' element={<Offers />} />
+        <Route path='/submits' element={<Submits />} />
+        <Route path='/results' element={<Results />} />
+        <Route path='/notifications' element={<Notifications />} />
       </Routes>
     </AppShell>
   );

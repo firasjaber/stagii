@@ -10,7 +10,7 @@ import Offers from '../pages/Offers';
 import Submits from '../pages/Submits';
 import Results from '../pages/Results';
 import Notifications from '../pages/Notifications';
-import { SearchIcon } from '@heroicons/react/solid';
+import { LogoutIcon, SearchIcon } from '@heroicons/react/solid';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -22,12 +22,32 @@ const MainLayout = (props: Props) => {
           <Navbar.Section grow mt='lg'>
             <NavbarList />
           </Navbar.Section>
-          <Navbar.Section>Last section</Navbar.Section>
+          <Navbar.Section className='mb-4'>
+            <hr className='text-gray-300 mb-4' />
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center space-x-4'>
+                <img
+                  src={
+                    'https://images.generated.photos/p6pAQ3UGbnFfxauhCvPT8uAi-_nVJf1Tzyqx2Bz2II8/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NTA3MTQwLmpwZw.jpg'
+                  }
+                  alt='face'
+                  className='rounded-full w-12 h-12'
+                />
+                <div className='flex flex-col'>
+                  <div className='font-sans'>Satouchi Nakamora</div>
+                  <div className='text-gray-400  text-sm'>
+                    satouchi@bitcoin.org
+                  </div>
+                </div>
+              </div>
+              <LogoutIcon className='w-8 h-8  text-gray-600 hover:bg-gray-200 rounded-full transition-all ease-in-out p-2 cursor-pointer' />
+            </div>
+          </Navbar.Section>
         </Navbar>
       }
       header={
         <Header height={60} padding='xs'>
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center justify-between pl-2'>
             <Brand />
             <Input
               className='rounded-md w-80'
@@ -39,10 +59,7 @@ const MainLayout = (props: Props) => {
       }
       styles={(theme) => ({
         main: {
-          backgroundColor:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
+          backgroundColor: theme.colors.gray[0],
         },
       })}
     >

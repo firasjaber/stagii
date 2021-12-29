@@ -66,7 +66,7 @@ interface Props {}
 
 const NavbarList = (props: Props) => {
   return (
-    <div>
+    <div className='font-sans'>
       {pages.map(({ href, title, Icon }, idx) => (
         <ListItem href={href} title={title} Icon={Icon} key={idx} />
       ))}

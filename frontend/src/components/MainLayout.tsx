@@ -1,6 +1,10 @@
 import React from 'react';
 import { AppShell, Navbar, Header } from '@mantine/core';
 import Brand from './Brand';
+import NavbarList from './NavbarList';
+import { Route, Routes } from 'react-router';
+import Home from '../pages/Home';
+import Students from '../pages/Students';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -10,7 +14,7 @@ const MainLayout = (props: Props) => {
       navbar={
         <Navbar width={{ base: 300 }} padding='xs'>
           <Navbar.Section grow mt='lg'>
-            Grow section
+            <NavbarList />
           </Navbar.Section>
           <Navbar.Section>Last section</Navbar.Section>
         </Navbar>
@@ -29,7 +33,10 @@ const MainLayout = (props: Props) => {
         },
       })}
     >
-      {/* Your application here */}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/students' element={<Students />} />
+      </Routes>
     </AppShell>
   );
 };

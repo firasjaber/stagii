@@ -10,9 +10,9 @@ function App() {
     <MantineProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<MainLayout />} />
-          <Route path='login' element={<Login />} />
-          <Route path='register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/*' element={<MainLayout />} />
         </Routes>
       </BrowserRouter>
     </MantineProvider>

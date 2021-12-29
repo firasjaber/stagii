@@ -9,15 +9,15 @@ import { AuthProvider } from './contexts/useAuth';
 function App() {
   return (
     <MantineProvider>
-      <AuthProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
           <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/*' element={<MainLayout />} />
           </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </MantineProvider>
   );
 }

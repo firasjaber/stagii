@@ -4,16 +4,13 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:4000';
 
 interface AuthContextType {
-  // We defined the user type in `index.d.ts`, but it's
-  // a simple object with email, name and password.
   user?: any;
   loading: boolean;
   error?: any;
@@ -49,12 +46,12 @@ export function AuthProvider({
 
   useEffect(() => {
     const authToken = localStorage.getItem('auth-token');
-    if (authToken) {
+    if (authToken && (!token || !user)) {
       setToken(authToken);
       loadUser();
     }
     //eslint-disable-next-line
-  }, []);
+  }, [token, user]);
 
   const loadUser = async () => {
     if (!token) return null;
@@ -66,7 +63,7 @@ export function AuthProvider({
     };
     try {
       const res = await axios.get(API_URL + '/auth/', config);
-      console.log(res);
+      setToken(res.data.token);
       setUser(res.data.user);
     } catch (err) {
       setError(err);
@@ -84,12 +81,12 @@ export function AuthProvider({
     const body = { email, password };
     try {
       const res = await axios.post(API_URL + '/auth/login', body, config);
-      console.log(res);
       setUser(res.data.user);
       setToken(res.data.token);
+      setError('');
       localStorage.setItem('auth-token', res.data.token);
-    } catch (err) {
-      setError(err);
+    } catch (err: any) {
+      setError(err.response.data.message);
     }
     setLoading(false);
   };
@@ -110,9 +107,10 @@ export function AuthProvider({
       },
     };
     try {
-      await axios.post(API_URL + '/auth/login', body, config);
-    } catch (err) {
-      setError(err);
+      await axios.post(API_URL + '/auth/register', body, config);
+      setError('');
+    } catch (err: any) {
+      setError(err.response.data.message);
     }
     setLoading(false);
   };

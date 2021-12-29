@@ -1,14 +1,20 @@
 import { KeyIcon, MailIcon } from '@heroicons/react/solid';
 import { Button, Paper, Text, TextInput } from '@mantine/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Brand from '../components/Brand';
+import useAuth from '../contexts/useAuth';
 
 interface Props {}
 
 const Login = (props: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { login, error } = useAuth();
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   return (
     <div className='bg-gray-100 h-screen w-screen flex items-center justify-center'>
@@ -30,6 +36,7 @@ const Login = (props: Props) => {
             label='Email address'
             icon={<MailIcon className='w-6 h-6 opacity-60' />}
             onChange={(event) => setEmail(event.currentTarget.value)}
+            error={error}
             required
           />
           <TextInput
@@ -38,10 +45,16 @@ const Login = (props: Props) => {
             placeholder='************'
             icon={<KeyIcon className='w-6 h-6 opacity-60' />}
             onChange={(event) => setPassword(event.currentTarget.value)}
+            invalid={error ? true : false}
+            error={error}
             required
           />
         </div>
-        <Button variant='outline' className='w-[270px] mb-2 mt-6'>
+        <Button
+          variant='outline'
+          className='w-[270px] mb-2 mt-6'
+          onClick={() => login(email, password)}
+        >
           Sign In
         </Button>
         <Text>

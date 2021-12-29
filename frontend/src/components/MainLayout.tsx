@@ -3,29 +3,21 @@ import { AppShell, Navbar, Header } from '@mantine/core';
 import Brand from './Brand';
 interface Props {}
 
-const Layout = (props: Props) => {
+const MainLayout = (props: Props) => {
   return (
     <AppShell
       padding='md'
       navbar={
-        <Navbar width={{ base: 300 }} height={500} padding='xs'>
-          {/* First section with normal height (depends on section content) */}
-          <Navbar.Section>
-            <Brand />
-          </Navbar.Section>
-
-          {/* Grow section will take all available space that is not taken by first and last sections */}
+        <Navbar width={{ base: 300 }} padding='xs'>
           <Navbar.Section grow mt='lg'>
             Grow section
           </Navbar.Section>
-
-          {/* Last section with normal height (depends on section content) */}
           <Navbar.Section>Last section</Navbar.Section>
         </Navbar>
       }
       header={
         <Header height={60} padding='xs'>
-          {/* Header content */}
+          <Brand />
         </Header>
       }
       styles={(theme) => ({
@@ -42,4 +34,4 @@ const Layout = (props: Props) => {
   );
 };
 
-export default Layout;
+export default MainLayout;

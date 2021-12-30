@@ -24,7 +24,7 @@ const Register = (props: Props) => {
   const { register, user, loading } = useAuth();
   const navigate = useNavigate();
   const handleRegister = async () => {
-    await register(firstName, lastName, email, password, type);
+    await register(email, firstName, lastName, password, type);
     navigate('/login');
   };
 
@@ -48,7 +48,6 @@ const Register = (props: Props) => {
           <TextInput
             value={firstName}
             placeholder='Joe'
-            type='email'
             label='First Name'
             icon={<UserIcon className='w-6 h-6 opacity-60' />}
             onChange={(event) => setFirstName(event.currentTarget.value)}
@@ -65,7 +64,6 @@ const Register = (props: Props) => {
           <TextInput
             value={email}
             placeholder='contact@email.com'
-            type='email'
             label='Email address'
             icon={<MailIcon className='w-6 h-6 opacity-60' />}
             onChange={(event) => setEmail(event.currentTarget.value)}

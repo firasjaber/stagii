@@ -1,6 +1,6 @@
 import { KeyIcon, MailIcon } from '@heroicons/react/solid';
 import { Button, Paper, Text, TextInput } from '@mantine/core';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Brand from '../components/Brand';
 import useAuth from '../contexts/useAuth';
@@ -12,9 +12,6 @@ const Login = (props: Props) => {
   const [password, setPassword] = useState('');
 
   const { login, error, user, loading } = useAuth();
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
 
   if (user) {
     return <Navigate to='/' />;

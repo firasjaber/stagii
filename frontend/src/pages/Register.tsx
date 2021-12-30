@@ -8,7 +8,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Brand from '../components/Brand';
 import useAuth from '../contexts/useAuth';
 
@@ -21,12 +21,16 @@ const Register = (props: Props) => {
   const [password, setPassword] = useState('');
   const [type, setType] = useState('STUDENT');
 
-  const { register, loading } = useAuth();
+  const { register, user, loading } = useAuth();
   const navigate = useNavigate();
   const handleRegister = async () => {
     await register(firstName, lastName, email, password, type);
     navigate('/login');
   };
+
+  if (user) {
+    return <Navigate to='/login' />;
+  }
 
   return (
     <div className='bg-gray-100 h-screen w-screen flex items-center justify-center'>

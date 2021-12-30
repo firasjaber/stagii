@@ -39,10 +39,10 @@ const MainLayout = (props: Props) => {
                   className='rounded-full w-12 h-12'
                 />
                 <div className='flex flex-col'>
-                  <div className='font-sans'>Satouchi Nakamora</div>
-                  <div className='text-gray-400  text-sm'>
-                    satouchi@bitcoin.org
+                  <div className='font-sans'>
+                    {user.firstName + ' ' + user.lastName}
                   </div>
+                  <div className='text-gray-400  text-sm'>{user.email}</div>
                 </div>
               </div>
               <LogoutIcon

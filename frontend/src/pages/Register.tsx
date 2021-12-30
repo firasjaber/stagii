@@ -8,8 +8,9 @@ import {
   TextInput,
 } from '@mantine/core';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Brand from '../components/Brand';
+import useAuth from '../contexts/useAuth';
 
 interface Props {}
 
@@ -18,6 +19,14 @@ const Register = (props: Props) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [type, setType] = useState('STUDENT');
+
+  const { register, loading } = useAuth();
+  const navigate = useNavigate();
+  const handleRegister = async () => {
+    await register(firstName, lastName, email, password, type);
+    navigate('/login');
+  };
 
   return (
     <div className='bg-gray-100 h-screen w-screen flex items-center justify-center'>
@@ -35,9 +44,10 @@ const Register = (props: Props) => {
           <TextInput
             value={firstName}
             placeholder='Joe'
+            type='email'
             label='First Name'
             icon={<UserIcon className='w-6 h-6 opacity-60' />}
-            onChange={(event) => setEmail(event.currentTarget.value)}
+            onChange={(event) => setFirstName(event.currentTarget.value)}
             required
           />
           <TextInput
@@ -45,7 +55,7 @@ const Register = (props: Props) => {
             placeholder='Doe'
             label='Last Name'
             icon={<UserIcon className='w-6 h-6 opacity-60' />}
-            onChange={(event) => setEmail(event.currentTarget.value)}
+            onChange={(event) => setLastName(event.currentTarget.value)}
             required
           />
           <TextInput
@@ -60,18 +70,32 @@ const Register = (props: Props) => {
           <TextInput
             value={password}
             label='Password'
+            type='password'
             placeholder='************'
             icon={<KeyIcon className='w-6 h-6 opacity-60' />}
             onChange={(event) => setPassword(event.currentTarget.value)}
             required
           />
-          <RadioGroup label='Are you a :' variant='vertical' required>
-            <Radio value='STUDENT'>Student</Radio>
+          <RadioGroup
+            label='Are you a :'
+            variant='vertical'
+            required
+            value={type}
+            onChange={setType}
+          >
+            <Radio value='STUDENT' checked>
+              Student
+            </Radio>
             <Radio value='EMPLOYER'>Employer</Radio>
             <Radio value='ADMINISTRATIVE'>Administrative</Radio>
           </RadioGroup>
         </div>
-        <Button variant='outline' className='w-[270px] mb-2 mt-6'>
+        <Button
+          variant='outline'
+          className='w-[270px] mb-2 mt-6'
+          onClick={handleRegister}
+          loading={loading}
+        >
           Sign up
         </Button>
         <Text>

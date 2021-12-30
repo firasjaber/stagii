@@ -45,6 +45,7 @@ const Login = (props: Props) => {
           <TextInput
             value={password}
             label='Password'
+            type='password'
             placeholder='************'
             icon={<KeyIcon className='w-6 h-6 opacity-60' />}
             onChange={(event) => setPassword(event.currentTarget.value)}
@@ -61,7 +62,7 @@ const Login = (props: Props) => {
         >
           Sign In
         </Button>
-        <Text>
+        <Text className='mb-4'>
           You dont have an account ?
           <Link
             to='/register'

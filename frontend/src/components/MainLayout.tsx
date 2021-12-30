@@ -2,7 +2,7 @@ import React from 'react';
 import { AppShell, Navbar, Header, Input } from '@mantine/core';
 import Brand from './Brand';
 import NavbarList from './NavbarList';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import Home from '../pages/Home';
 import Students from '../pages/Students';
 import Companies from '../pages/Companies';
@@ -11,9 +11,14 @@ import Submits from '../pages/Submits';
 import Results from '../pages/Results';
 import Notifications from '../pages/Notifications';
 import { LogoutIcon, SearchIcon } from '@heroicons/react/solid';
+import useAuth from '../contexts/useAuth';
 interface Props {}
 
 const MainLayout = (props: Props) => {
+  const { user, logout } = useAuth();
+  if (!user) {
+    return <Navigate to='/login' />;
+  }
   return (
     <AppShell
       padding='md'
@@ -40,7 +45,10 @@ const MainLayout = (props: Props) => {
                   </div>
                 </div>
               </div>
-              <LogoutIcon className='w-8 h-8  text-gray-600 hover:bg-gray-200 rounded-full transition-all ease-in-out p-2 cursor-pointer' />
+              <LogoutIcon
+                onClick={() => logout()}
+                className='w-8 h-8  text-gray-600 hover:bg-gray-200 rounded-full transition-all ease-in-out p-2 cursor-pointer'
+              />
             </div>
           </Navbar.Section>
         </Navbar>

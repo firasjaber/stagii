@@ -1,7 +1,7 @@
 import { KeyIcon, MailIcon } from '@heroicons/react/solid';
 import { Button, Paper, Text, TextInput } from '@mantine/core';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Brand from '../components/Brand';
 import useAuth from '../contexts/useAuth';
 
@@ -11,11 +11,14 @@ const Login = (props: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login, error } = useAuth();
+  const { login, error, user, loading } = useAuth();
   useEffect(() => {
     console.log(error);
   }, [error]);
 
+  if (user) {
+    return <Navigate to='/' />;
+  }
   return (
     <div className='bg-gray-100 h-screen w-screen flex items-center justify-center'>
       <Paper
@@ -54,6 +57,7 @@ const Login = (props: Props) => {
           variant='outline'
           className='w-[270px] mb-2 mt-6'
           onClick={() => login(email, password)}
+          loading={loading}
         >
           Sign In
         </Button>

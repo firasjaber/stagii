@@ -14,8 +14,9 @@ import { LogoutIcon, SearchIcon } from '@heroicons/react/solid';
 import useAuth from '../contexts/useAuth';
 import Tickets from '../pages/Tickets';
 import Ticket from '../pages/Ticket';
+import Company from '../pages/Company';
 import Student from '../pages/Student';
-interface Props {}
+interface Props { }
 
 const MainLayout = (props: Props) => {
   const { user, logout } = useAuth();
@@ -85,6 +86,8 @@ const MainLayout = (props: Props) => {
         <Route path='/notifications' element={<Notifications />} />
         <Route path='/tickets' element={<Tickets />} />
         <Route path='/ticket/:id' element={<Ticket />} />
+        <Route path='/company' element={<Companies />} />
+        <Route path='//company/profile/:id' element={<Company />} />
       </Routes>
     </AppShell>
   );

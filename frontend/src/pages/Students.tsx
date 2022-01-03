@@ -2,7 +2,7 @@ import { Avatar, Button, SimpleGrid, Title } from '@mantine/core';
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-interface Props {}
+interface Props { }
 
 const data = [
   { id: 0, fullName: 'Firas Jaber', classN: 'MDW 31' },

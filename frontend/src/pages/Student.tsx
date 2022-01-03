@@ -2,7 +2,7 @@ import { Avatar, Button, Card, Title } from '@mantine/core';
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-interface Props {}
+interface Props { }
 
 const Student = (props: Props) => {
   const imgUrl =

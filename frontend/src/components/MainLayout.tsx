@@ -14,6 +14,7 @@ import { LogoutIcon, SearchIcon } from '@heroicons/react/solid';
 import useAuth from '../contexts/useAuth';
 import Tickets from '../pages/Tickets';
 import Ticket from '../pages/Ticket';
+import Student from '../pages/Student';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -76,6 +77,7 @@ const MainLayout = (props: Props) => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/students' element={<Students />} />
+        <Route path='/student/profile/:id' element={<Student />} />
         <Route path='/companies' element={<Companies />} />
         <Route path='/offers' element={<Offers />} />
         <Route path='/submits' element={<Submits />} />

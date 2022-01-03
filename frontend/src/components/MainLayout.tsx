@@ -12,6 +12,8 @@ import Results from '../pages/Results';
 import Notifications from '../pages/Notifications';
 import { LogoutIcon, SearchIcon } from '@heroicons/react/solid';
 import useAuth from '../contexts/useAuth';
+import Tickets from '../pages/Tickets';
+import Ticket from '../pages/Ticket';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -79,6 +81,8 @@ const MainLayout = (props: Props) => {
         <Route path='/submits' element={<Submits />} />
         <Route path='/results' element={<Results />} />
         <Route path='/notifications' element={<Notifications />} />
+        <Route path='/tickets' element={<Tickets />} />
+        <Route path='/ticket/:id' element={<Ticket />} />
       </Routes>
     </AppShell>
   );

@@ -1,5 +1,6 @@
 import {
   AnnotationIcon,
+  DocumentIcon,
   FolderAddIcon,
   FolderOpenIcon,
   LibraryIcon,
@@ -51,6 +52,13 @@ const pages = [
     title: 'Results',
     Icon: (
       <PrinterIcon className='h-6 w-6 bg-sky-200 text-sky-400 p-[3px] rounded-sm' />
+    ),
+  },
+  {
+    href: '/tickets',
+    title: 'Tickets',
+    Icon: (
+      <DocumentIcon className='h-6 w-6 bg-sky-200 text-sky-700 p-[3px] rounded-sm' />
     ),
   },
   {

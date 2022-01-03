@@ -1,4 +1,3 @@
-import { TrashIcon } from '@heroicons/react/solid';
 import { Avatar, Button, Card, Title } from '@mantine/core';
 import React from 'react';
 import { useNavigate } from 'react-router';
@@ -8,57 +7,68 @@ interface Props {}
 const data = [
   {
     id: 0,
-    title: 'Student affected at proxiweb',
+    title: 'Title ticket azerty',
     date: '20 Jun 2001',
     pending: true,
     studentName: 'Firas Jaber',
   },
   {
     id: 1,
-    title: 'Studetn rejected',
+    title: 'Title ticket azerty',
     pending: true,
     date: '20 Jun 2001',
-    studentName: 'khalil amamra',
+    studentName: 'Firas Jaber',
   },
   {
     id: 2,
-    title: 'PFE approved',
+    title: 'Title ticket azerty',
     pending: false,
     date: '20 Jun 2001',
     studentName: 'Firas Jaber',
   },
   {
     id: 3,
-    title: 'Student affected',
+    title: 'Title ticket azerty',
     pending: false,
     date: '20 Jun 2001',
-    studentName: 'Tarek chafroud',
+    studentName: 'Firas Jaber',
   },
 ];
 
-const Notifications = (props: Props) => {
+const Tickets = (props: Props) => {
   const navigate = useNavigate();
   return (
     <div className='w-full'>
       <div className='flex flex-row items-center justify-between mb-4'>
-        <Title order={2}>Notfications</Title>
+        <Title order={2}>Students Tickets</Title>
+        <Button variant='outline'>Add Ticket</Button>
       </div>
       <div className='space-y-4 w-full'>
         {data.map((ticket) => (
           <Card
             shadow='sm'
             padding='lg'
-            className='w-full flex flex-row items-center justify-between'
+            className='w-full flex flex-row items-center justify-between hover:bg-gray-200 cursor-pointer transition-all ease-in-out'
             onClick={() => navigate('/ticket/' + ticket.id)}
           >
             <div className='block'>
-              <div>{ticket.title} </div>
+              <div>
+                {ticket.title}{' '}
+                <span
+                  className={
+                    ticket.pending
+                      ? 'text-sm text-orange-400 opacity-80'
+                      : 'text-sm text-green-600 opacity-80'
+                  }
+                >
+                  {ticket.pending ? 'Pending' : 'Resolved'}
+                </span>
+              </div>
               <div className='text-sm text-gray-400'>{ticket.date}</div>
             </div>
             <div className='flex flex-row items-center space-x-2'>
               <Avatar radius='xl' />
-              <div className='pr-4'>{ticket.studentName}</div>
-              <TrashIcon className='w-8 h-8 p-2 text-orange-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-all ease-in-out cursor-pointer' />
+              <div>{ticket.studentName}</div>
             </div>
           </Card>
         ))}
@@ -67,4 +77,4 @@ const Notifications = (props: Props) => {
   );
 };
 
-export default Notifications;
+export default Tickets;

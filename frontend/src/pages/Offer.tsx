@@ -36,7 +36,11 @@ const Offer = (props: Props) => {
             </div>
           </div>
           <div>
-            <Avatar size={150} className='rounded-full m-4' src={imgUrl} />
+            <Avatar
+              size={150}
+              className='rounded-full m-4 shadow'
+              src={imgUrl}
+            />
           </div>
         </div>
         <div className='mt-3'>

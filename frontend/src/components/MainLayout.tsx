@@ -16,7 +16,8 @@ import Tickets from '../pages/Tickets';
 import Ticket from '../pages/Ticket';
 import Company from '../pages/Company';
 import Student from '../pages/Student';
-interface Props { }
+import Offer from '../pages/Offer';
+interface Props {}
 
 const MainLayout = (props: Props) => {
   const { user, logout } = useAuth();
@@ -81,6 +82,7 @@ const MainLayout = (props: Props) => {
         <Route path='/student/profile/:id' element={<Student />} />
         <Route path='/companies' element={<Companies />} />
         <Route path='/offers' element={<Offers />} />
+        <Route path='/offers/:id' element={<Offer />} />
         <Route path='/submits' element={<Submits />} />
         <Route path='/results' element={<Results />} />
         <Route path='/notifications' element={<Notifications />} />

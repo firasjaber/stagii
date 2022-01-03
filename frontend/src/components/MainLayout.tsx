@@ -17,6 +17,7 @@ import Ticket from '../pages/Ticket';
 import Company from '../pages/Company';
 import Student from '../pages/Student';
 import Offer from '../pages/Offer';
+import Submit from '../pages/Submit';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -84,6 +85,7 @@ const MainLayout = (props: Props) => {
         <Route path='/offers' element={<Offers />} />
         <Route path='/offers/:id' element={<Offer />} />
         <Route path='/submits' element={<Submits />} />
+        <Route path='/submit/:id' element={<Submit />} />
         <Route path='/results' element={<Results />} />
         <Route path='/notifications' element={<Notifications />} />
         <Route path='/tickets' element={<Tickets />} />

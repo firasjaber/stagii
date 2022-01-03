@@ -27,6 +27,14 @@ const Offer = (props: Props) => {
               End of Studies Project
             </div>
             <div>
+              <span className='text-gray-400 text-sm'>Starts at : </span> 12 Jun
+              2021
+            </div>
+            <div>
+              <span className='text-gray-400 text-sm'>Ends at : </span> 12 Mars
+              2021
+            </div>
+            <div>
               <span className='text-gray-400 text-sm'>Posted at : </span> 12 Jun
               2001
             </div>

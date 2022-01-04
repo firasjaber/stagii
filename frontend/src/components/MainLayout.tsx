@@ -2,7 +2,7 @@ import React from 'react';
 import { AppShell, Navbar, Header, Input } from '@mantine/core';
 import Brand from './Brand';
 import NavbarList from './NavbarList';
-import { Navigate, Route, Routes } from 'react-router';
+import { Navigate, Route, Routes, useNavigate } from 'react-router';
 import Home from '../pages/Home';
 import Students from '../pages/Students';
 import Companies from '../pages/Companies';
@@ -18,10 +18,14 @@ import Company from '../pages/Company';
 import Student from '../pages/Student';
 import Offer from '../pages/Offer';
 import Submit from '../pages/Submit';
+import AddCompanyProfile from '../pages/AddCompanyProfile';
+import AddStudentProfile from '../pages/AddStudentProfile';
 interface Props {}
 
 const MainLayout = (props: Props) => {
   const { user, logout } = useAuth();
+  console.log(user);
+  const navigate = useNavigate();
   if (!user) {
     return <Navigate to='/login' />;
   }
@@ -36,7 +40,16 @@ const MainLayout = (props: Props) => {
           <Navbar.Section className='mb-4'>
             <hr className='text-gray-300 mb-4' />
             <div className='flex items-center justify-between'>
-              <div className='flex items-center space-x-4'>
+              <div
+                className='flex items-center space-x-4 hover:bg-gray-100 p-2 rounded-md cursor-pointer w-full'
+                onClick={() =>
+                  navigate(
+                    user.type === 'STUDENT'
+                      ? '/student/profile/add'
+                      : '/company/profile/add'
+                  )
+                }
+              >
                 <img
                   src={
                     'https://images.generated.photos/p6pAQ3UGbnFfxauhCvPT8uAi-_nVJf1Tzyqx2Bz2II8/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NTA3MTQwLmpwZw.jpg'
@@ -81,6 +94,7 @@ const MainLayout = (props: Props) => {
         <Route path='/' element={<Home />} />
         <Route path='/students' element={<Students />} />
         <Route path='/student/profile/:id' element={<Student />} />
+        <Route path='/student/profile/add' element={<AddStudentProfile />} />
         <Route path='/companies' element={<Companies />} />
         <Route path='/offers' element={<Offers />} />
         <Route path='/offers/:id' element={<Offer />} />
@@ -91,7 +105,8 @@ const MainLayout = (props: Props) => {
         <Route path='/tickets' element={<Tickets />} />
         <Route path='/ticket/:id' element={<Ticket />} />
         <Route path='/company' element={<Companies />} />
-        <Route path='//company/profile/:id' element={<Company />} />
+        <Route path='/company/profile/:id' element={<Company />} />
+        <Route path='/company/profile/add' element={<AddCompanyProfile />} />
       </Routes>
     </AppShell>
   );

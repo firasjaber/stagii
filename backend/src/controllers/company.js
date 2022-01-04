@@ -1,5 +1,6 @@
 import Company from './../models/Company.js';
 import User from './../models/User.js';
+import Notification from '../models/Notification.js';
 
 export const getProfile = async (req, res) => {
   try {
@@ -19,6 +20,10 @@ export const addProfile = async (req, res) => {
       { hasProfile: true },
       { new: true }
     );
+    await Notification.create({
+      studentName: req.body.companyName,
+      message: req.body.companyName + ' created its profile.',
+    });
     return res
       .status(200)
       .json({ success: true, message: 'Company created succesfully' });

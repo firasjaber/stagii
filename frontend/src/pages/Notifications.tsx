@@ -3,6 +3,7 @@ import { Avatar, Button, Card, Skeleton, Title } from '@mantine/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { format } from 'date-fns';
 
 interface Props {}
 
@@ -83,7 +84,10 @@ const Notifications = (props: Props) => {
             >
               <div className='block'>
                 <div>{ticket.message} </div>
-                <div className='text-sm text-gray-400'>{ticket.createdAt}</div>
+                <div className='text-sm text-gray-400'>
+                  {ticket?.createdAt &&
+                    format(new Date(ticket?.createdAt), 'do MMMM yyyy hh:mm')}
+                </div>
               </div>
               <div className='flex flex-row items-center space-x-2'>
                 <Avatar radius='xl' />

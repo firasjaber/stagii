@@ -2,7 +2,7 @@ import { Button, Card, Skeleton, Title } from '@mantine/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-
+import { format } from 'date-fns';
 interface Props {}
 
 const Ticket = (props: Props) => {
@@ -63,8 +63,9 @@ const Ticket = (props: Props) => {
             {data.studentPhone}
           </div>
           <div>
-            <span className='text-gray-400 text-sm'>Submitted at : </span> 21
-            {data.createdAt}
+            <span className='text-gray-400 text-sm'>Submitted at : </span>
+            {data?.createdAt &&
+              format(new Date(data?.createdAt), 'do MMMM yyyy hh:mm')}
           </div>
           <div>
             <span className='text-gray-400 text-sm'>Message : </span>

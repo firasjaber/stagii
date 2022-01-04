@@ -2,6 +2,7 @@ import { Avatar, Button, Card, Skeleton, Title } from '@mantine/core';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { format } from 'date-fns';
 
 interface Props {}
 
@@ -71,7 +72,8 @@ const Student = (props: Props) => {
               </div>
               <div>
                 <span className='text-gray-400 text-sm'>Joined at : </span>{' '}
-                {data.createdAt}
+                {data?.createdAt &&
+                  format(new Date(data?.createdAt), 'do MMMM yyyy hh:mm')}
               </div>
               <div>
                 <span className='text-gray-400 text-sm'>

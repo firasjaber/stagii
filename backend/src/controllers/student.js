@@ -1,3 +1,4 @@
+import Notification from '../models/Notification.js';
 import Ticket from '../models/Ticket.js';
 import User from '../models/User.js';
 import Student from './../models/Student.js';
@@ -33,6 +34,10 @@ export const submitTicket = async (req, res) => {
     console.log(req.body);
     const student = await Student.findOne({ user: req.body.id });
     await Ticket.create({ ...req.body, studentPhone: student.studentPhone });
+    await Notification.create({
+      studentName: req.body.studentName,
+      message: req.body.studentName + ' opened a new ticket.',
+    });
     return res
       .status(200)
       .json({ success: true, message: 'Ticket created succesfully' });
@@ -43,7 +48,7 @@ export const submitTicket = async (req, res) => {
 
 export const getTicket = async (req, res) => {
   try {
-    const tt = await Ticket.find({});
+    const tt = await Ticket.find({}).sort({ field: 'asc', createdAt: -1 });
     return res.status(200).json({ success: true, tickets: tt });
   } catch (error) {
     console.log(error);
@@ -61,12 +66,40 @@ export const getOneTicket = async (req, res) => {
 
 export const resolveTicket = async (req, res) => {
   try {
+    const t = await Ticket.findById(req.params.id);
     await Ticket.findByIdAndUpdate(
       req.params.id,
       { pending: false },
       { new: true }
     );
+    await Notification.create({
+      studentName: t.studentName,
+      message: t.studentName + ' ticket now resolved.',
+    });
     return res.status(200).json({ success: true, message: 'Ticket resolved' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getNotifications = async (req, res) => {
+  try {
+    const notifications = await Notification.find({}).sort({
+      field: 'asc',
+      createdAt: -1,
+    });
+    return res.status(200).json({ success: true, notifications });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteNotification = async (req, res) => {
+  try {
+    await Notification.findByIdAndDelete(req.params.id);
+    return res
+      .status(200)
+      .json({ success: true, message: 'notifcation deleted' });
   } catch (error) {
     console.log(error);
   }

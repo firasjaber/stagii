@@ -58,3 +58,16 @@ export const getOneTicket = async (req, res) => {
     console.log(error);
   }
 };
+
+export const resolveTicket = async (req, res) => {
+  try {
+    await Ticket.findByIdAndUpdate(
+      req.params.id,
+      { pending: false },
+      { new: true }
+    );
+    return res.status(200).json({ success: true, message: 'Ticket resolved' });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -22,6 +22,10 @@ const TicketSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    pending: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

@@ -1,7 +1,7 @@
 import { Button, Card, Skeleton, Title } from '@mantine/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 interface Props {}
 
@@ -23,6 +23,16 @@ const Ticket = (props: Props) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const navigate = useNavigate();
+  const handleResolve = async () => {
+    try {
+      await axios.put('http://localhost:4000/student/ticket/' + id);
+      navigate('/tickets');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <Title order={2} className='mb-4'>
@@ -61,11 +71,12 @@ const Ticket = (props: Props) => {
           </div>
           <p>{data.message}</p>
           <div className='flex items-center space-x-2 mt-4'>
-            <Button variant='outline' color='green'>
+            <Button
+              variant='outline'
+              color='green'
+              onClick={() => handleResolve()}
+            >
               Resolve
-            </Button>
-            <Button variant='outline' color='red'>
-              Delete
             </Button>
           </div>
         </Card>

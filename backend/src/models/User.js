@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    hasProfile: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String,
       enum: ['STUDENT', 'EMPLOYER', 'ADMINISTRATIVE'],

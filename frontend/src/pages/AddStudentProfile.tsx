@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Card, Textarea, TextInput, Title } from '@mantine/core';
+import useAuth from '../contexts/useAuth';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 interface Props {}
 
 const AddStudentProfile = (props: Props) => {
@@ -18,6 +21,28 @@ const AddStudentProfile = (props: Props) => {
 
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const navigate = useNavigate();
+  const { user, loadUser } = useAuth();
+  const save = async () => {
+    const API_URL = 'http://localhost:4000/student/addprofile';
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post(
+        API_URL,
+        { ...form, user: user._id },
+        config
+      );
+      loadUser();
+      navigate('/');
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -102,7 +127,7 @@ const AddStudentProfile = (props: Props) => {
             className='mt-4'
             variant={'outline'}
             color='green'
-            onClick={() => console.log(form)}
+            onClick={() => save()}
           >
             Save
           </Button>

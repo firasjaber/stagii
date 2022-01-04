@@ -23,6 +23,7 @@ interface AuthContextType {
     password: string
   ) => Promise<void>;
   logout: () => void;
+  loadUser: any;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -123,7 +124,7 @@ export function AuthProvider({
 
   return (
     <AuthContext.Provider
-      value={{ user, error, loading, login, logout, register }}
+      value={{ user, error, loading, loadUser, login, logout, register }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,5 +1,9 @@
 import { Button, Card, Textarea, TextInput, Title } from '@mantine/core';
+import axios from 'axios';
+import { userInfo } from 'os';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../contexts/useAuth';
 
 interface Props {}
 
@@ -19,6 +23,29 @@ const AddCompanyProfile = (props: Props) => {
 
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const navigate = useNavigate();
+  const { user, loadUser } = useAuth();
+  const save = async () => {
+    const API_URL = 'http://localhost:4000/company/addprofile';
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post(
+        API_URL,
+        { ...form, user: user._id },
+        config
+      );
+      loadUser();
+      navigate('/');
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -103,7 +130,7 @@ const AddCompanyProfile = (props: Props) => {
             className='mt-4'
             variant={'outline'}
             color='green'
-            onClick={() => console.log(form)}
+            onClick={() => save()}
           >
             Save
           </Button>

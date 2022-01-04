@@ -34,17 +34,21 @@ const MainLayout = (props: Props) => {
       padding='md'
       navbar={
         <Navbar width={{ base: 300 }} padding='xs'>
-          <Navbar.Section grow mt='lg'>
+          <Navbar.Section grow mt='lg' className='fixed w-[275px]'>
             <NavbarList />
           </Navbar.Section>
-          <Navbar.Section className='mb-4'>
+          <Navbar.Section className='mb-4 fixed bottom-2 w-[275px]'>
             <hr className='text-gray-300 mb-4' />
             <div className='flex items-center justify-between'>
               <div
                 className='flex items-center space-x-4 hover:bg-gray-100 p-2 rounded-md cursor-pointer w-full'
                 onClick={() =>
                   navigate(
-                    user.type === 'STUDENT'
+                    user.hasProfile
+                      ? user.type === 'STUDENT'
+                        ? '/student/profile/' + user._id
+                        : '/company/profile/' + user._id
+                      : user.type === 'STUDENT'
                       ? '/student/profile/add'
                       : '/company/profile/add'
                   )

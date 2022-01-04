@@ -20,6 +20,7 @@ import Offer from '../pages/Offer';
 import Submit from '../pages/Submit';
 import AddCompanyProfile from '../pages/AddCompanyProfile';
 import AddStudentProfile from '../pages/AddStudentProfile';
+import AddTicket from '../pages/AddTicket';
 interface Props {}
 
 const MainLayout = (props: Props) => {
@@ -107,6 +108,7 @@ const MainLayout = (props: Props) => {
         <Route path='/results' element={<Results />} />
         <Route path='/notifications' element={<Notifications />} />
         <Route path='/tickets' element={<Tickets />} />
+        <Route path='/newticket' element={<AddTicket />} />
         <Route path='/ticket/:id' element={<Ticket />} />
         <Route path='/company' element={<Companies />} />
         <Route path='/company/profile/:id' element={<Company />} />

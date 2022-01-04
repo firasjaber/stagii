@@ -1,6 +1,15 @@
 import Company from './../models/Company.js';
 import User from './../models/User.js';
 
+export const getProfile = async (req, res) => {
+  try {
+    const data = await Company.findOne({ user: req.params.id });
+    return res.status(200).json({ data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addProfile = async (req, res) => {
   try {
     console.log(req.body);
